@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rastgele Sayı Seç</title>
+    <style>
+        button {
+            padding: 10px;
+            margin: 5px;
+        }
+        .bold-red {
+            font-weight: bold;
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+ 
+    <button id="siralaButton" onclick="sirala()">Sırala</button>
+    <button id="secButton" onclick="sec()">Rastgele Sayı Seç</button>
+
+    <div id="sayilar"></div>
+    <script>
+    
+    let secilenSayilar = []; 
+
+        function sirala() {
+            let sayilarDiv = document.getElementById("sayilar");
+            sayilarDiv.innerHTML = "";
+
+            for (let i = 0; i < 100; i++) {
+                let span = document.createElement("span");
+                span.textContent =i;
+
+                if (i % 10 === 9) {
+                    span.innerHTML += "<br>";
+                } else {
+                    span.innerHTML += " ";
+                }
+
+                sayilarDiv.appendChild(span);
+            }
+
+            document.getElementById("siralaButton").disabled = true;
+            document.getElementById("secButton").disabled = false;
+           
+        }
+
+        function sec() {
+            let sayilarDiv = document.getElementById("sayilar");
+            let randomIndex = Math.floor(Math.random() *99) +1;
+       
+      
+            sayilarDiv.childNodes[randomIndex].classList.add("bold-red");
+        }
+    </script>
+
+</body>
+
+</html>

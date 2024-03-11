@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Sayısal Loto Oyunu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        input {
+            margin: 4px;
+            width: 50px;
+        }
+
+        button {
+            margin: 4px;
+        }
+
+        #kurayCekButonu[disabled] {
+            opacity: 0.5;
+        }
+
+
+
+        input[type="text"][disabled] {
+            background-color: #F8F8F8;
+            border: 1px solid #ccc;
+            padding: 5px 10px;
+            margin: 0 2px;
+            width: 50px;
+            height: 20px;
+            border-radius: 3px;
+            text-align: center;
+            box-sizing: border-box;
+           
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Sayısal Loto Oyunu</h1>
+    <div>
+        <p>Aşağıdaki kutucuklara tahminlerinizi giriniz:</p>
+        <input type="number" id="tahmin1" min="1" max="49" onblur="tekrarEdenTahminKontrolu(this)">
+        <input type="number" id="tahmin2" min="1" max="49" onblur="tekrarEdenTahminKontrolu(this)">
+        <input type="number" id="tahmin3" min="1" max="49" onblur="tekrarEdenTahminKontrolu(this)">
+        <input type="number" id="tahmin4" min="1" max="49" onblur="tekrarEdenTahminKontrolu(this)">
+        <input type="number" id="tahmin5" min="1" max="49" onblur="tekrarEdenTahminKontrolu(this)">
+        <input type="number" id="tahmin6" min="1" max="49" onblur="tekrarEdenTahminKontrolu(this)">
+        <button id="tahminGirButonu" onclick="tahminleriGir()">Tahmin Gir</button>
+
+    </div>
+    <div id="tahminGirildiBildirim" style="display: none;">Tahminler girildi.</div>
+    <hr>
+    <div>
+
+        <button id="kurayCekButonu" onclick="numaralariCek()" disabled>Kurayı Çek</button>
+    </div>
+    <div>
+        <p>Loto Sayıları:</p>
+        <input type="text" id="lotoSayilari1" disabled>
+        <input type="text" id="lotoSayilari2" disabled>
+        <input type="text" id="lotoSayilari3" disabled>
+        <input type="text" id="lotoSayilari4" disabled>
+        <input type="text" id="lotoSayilari5" disabled>
+        <input type="text" id="lotoSayilari6" disabled>
+    </div>
+    <div>
+        <p id="bilinenSayilarBildirim"></p>
+    </div>
+    <script>
+        function tahminleriGir() {
+            let tahminler = [];
+            for (let i = 1; i <= 6; i++) {
+                let tahmin = document.getElementById(`tahmin${i}`).value;
+                tahminler.push(parseInt(tahmin, 10));
+            }
+
+            if (new Set(tahminler).size !== tahminler.length) {
+                alert('Aynı tahmin bir kez girilebilir.');
+                return;
+            }
+
+            if (tahminler.some(isNaN) || tahminler.some(num => num < 1 || num > 49)) {
+                alert('1-49 sayıları arasında bir sayı girmelisiniz.');
+                return;
+            }
+
+            tahminler.sort((a, b) => a - b);
+
+            for (let i = 1; i <= 6; i++) {
+                document.getElementById(`tahmin${i}`).value = tahminler[i - 1];
+            }
+            document.getElementById('tahminGirButonu').disabled = true;
+            document.getElementById('kurayCekButonu').disabled = false;
+            document.getElementById('tahminGirildiBildirim').style.display = 'block';
+        }
+        function numaralariCek() {
+            let cekilisNumaralari = [];
+            while (cekilisNumaralari.length < 6) {
+                let rastgeleSayi = Math.floor(Math.random() * 49) + 1;
+                if (!cekilisNumaralari.includes(rastgeleSayi)) {
+                    cekilisNumaralari.push(rastgeleSayi);
+                }
+            }
+
+            cekilisNumaralari.sort((a, b) => a - b);
+
+            for (let i = 0; i < 6; i++) {
+                document.getElementById(`lotoSayilari${i + 1}`).value = cekilisNumaralari[i];
+            }
+
+            tahminleriKontrolEt(cekilisNumaralari);
+        }
+
+        function tekrarEdenTahminKontrolu(element) {
+            let girilenDeger = parseInt(element.value, 10);
+            let mevcutId = element.id;
+
+
+            if (isNaN(girilenDeger)) {
+                return;
+            }
+
+            for (let i = 1; i <= 6; i++) {
+                let digerInputId = `tahmin${i}`;
+                if (mevcutId !== digerInputId) {
+                    let digerDeger = parseInt(document.getElementById(digerInputId).value, 10);
+                    if (girilenDeger === digerDeger) {
+                        alert('Aynı tahmin bir kez girilebilir.');
+                        element.value = ''; 
+                        break;
+                    }
+                }
+            }
+        }
+
+        function tahminleriKontrolEt(cekilisNumaralari) {
+            let bilinenSayilar = [];
+            for (let i = 1; i <= 6; i++) {
+                let tahmin = parseInt(document.getElementById(`tahmin${i}`).value, 10);
+                if (cekilisNumaralari.includes(tahmin)) {
+                    bilinenSayilar.push(tahmin);
+                }
+            }
+
+            let bildirim = '';
+            if (bilinenSayilar.length > 0) {
+                bildirim += `Bilinen sayılar: ${bilinenSayilar.join(', ')}<br>`;
+            }
+            bildirim += `${bilinenSayilar.length} adet sayı bildiniz.`;
+
+            document.getElementById('bilinenSayilarBildirim').innerHTML = bildirim;
+            document.getElementById('tahminGirButonu').disabled = false;
+            document.getElementById('kurayCekButonu').disabled = true;
+        }
+
+    </script>
+</body>
+
+</html>
