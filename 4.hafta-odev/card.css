@@ -1,0 +1,56 @@
+/* <div class="card">
+  <i class="fa fa-twitter"></i>
+  <span class="title">280k</span>
+  <span class="subtitle">Followers</span>
+  <i class="fa fa-ellipsis-h"></i>
+</div> */
+
+.cards {
+  margin-top: 32px;
+  display: flex;
+  gap: 16px;
+}
+
+.card {
+  width: 200px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  border: 3px solid #fff;
+  border-radius: 12px;
+  padding: 16px;
+}
+.card .fa-twitter {
+  color: #1da1f2;
+  font-size: 32px;
+}
+.card .fa-instagram {
+  color: #7b4ed4;
+  font-size: 32px;
+}
+.card .fa-youtube {
+  color: #d51f1f;
+  font-size: 32px;
+}
+.card .fa-facebook {
+  color: #2d30be;
+  font-size: 32px;
+}
+.card .title {
+  font-size: 32px;
+  font-weight: bold;
+  margin-top: 12px;
+}
+
+.card .subtitle {
+  font-size: 12px;
+  color: gray;
+}
+.fa-ellipsis-h {
+  align-self: flex-end;
+  margin-top: 12px;
+}
+.card:hover {
+  background-color:#ffff;
+}
+

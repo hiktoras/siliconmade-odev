@@ -1,0 +1,87 @@
+aside {
+  width:25%;
+  background-color: #fff;
+}
+.asideButton {
+  border-radius: 10px;
+  background-color: rgb(240, 205, 210);
+  margin-left: 40px;
+  margin-right: 45px;
+}
+.aside-top {
+  margin: 10px;;
+margin: auto;
+margin-top: 30px;
+text-align: center;
+margin-right: 30px;
+
+
+}
+.update-text {
+  font-size: 18px;
+text-align: center;
+
+}
+.aside-top .fa-bell {
+font-size: 24px;
+
+}
+.aside-top .fa-gift {
+font-size: 24px;
+}
+.aside-top .fa-user {
+  font-size: 24px;
+}
+
+.board {
+  margin-top: 40px;
+  width: 400px;
+  height: 200px;
+  margin-left: 75px;
+}
+.datepicker-days {
+text-align: center;
+display: inline-block;
+border: 1px solid rgb(175, 171, 171);
+border-radius: 10px;
+margin-top: 60px;
+margin-left: 80px;
+padding-left: 80px;
+width: 380px;
+height:300px;
+
+}
+.datepicker {
+ display: inline-block;
+
+}
+
+.card-img {
+  width: 50px;
+  height: 50px;
+  margin-right: 30px;
+
+
+}
+.aside-footer-card {
+  border: 1px solid black;
+  border-radius: 15px;
+  width: 380px;
+  height: 100px;
+  margin: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+
+}
+.aside-footer-card span {
+  font-size: 16px;
+  font-weight: bold;
+  margin-left: 20px;
+}
+.aside-cards {
+  margin-left: 65px;
+ 
+
+}
